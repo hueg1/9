@@ -183,66 +183,66 @@
                 success: function(res) {
                     let resData = JSON.parse(res) 
                     if(resData.errno === 0) {
-                          警告  (  '获取验证码成功'  )
-                      }  其他的   {
-                          警告  ( 重新定位。 错误 )
+                        alert('获取验证码成功')
+                    } else {
+                        alert(resData.error)
                     }
-                  } ,
-                  错误 : 功能  ( 错误的 )   {
-                      警告  (  '获取验证码失败，请重新获取'  )
+                },
+                error: function(err) {
+                    alert('获取验证码失败，请重新获取')
                 }
-              }  )
+            })
         }
 
-         功能   扫描维护时间1  (  )   {
-        	  如果   ( curCount1 == 0  )  {                
-        		窗户。  间隙  ( 不同时期 ) ; //停止计时器
-        		  $  (  "#btnSendCode1"  ) . 迁移者  (  "disabled"  ) ; //启用按钮
-        		  $  (  "#btnSendCode1"  ) . 瓦尔  (  "重新发送"  ) ;
+        function SetRemainTime1() {
+        	if (curCount1 == 0) {                
+        		window.clearInterval(InterValObj1);//停止计时器
+        		$("#btnSendCode1").removeAttr("disabled");//启用按钮
+        		$("#btnSendCode1").val("重新发送");
         	}
-        	 其他的   {
-        		曲线1--;
-        		  $  (  "#btnSendCode1"  ) . 瓦尔  ( + curCount1 + "秒再获取"  ) ;
+        	else {
+        		curCount1--;
+        		$("#btnSendCode1").val( + curCount1 + "秒再获取");
         	}
         } 
         
         /*提交*/
-         功能   束缚的  (  ) {
-        	 Var  电话号码 = $. 修剪            (            $            (            '#phone1'            ) . 瓦尔            (            )            ) ;
-        	 Var  编码1 = $. 修剪           (          $         (        '#code1'       ) . 瓦尔      (     )    ) ;
-        	   如果    ( 电话及密码1 )   {
+        function binding(){
+        	var phone = $.trim($('#phone1').val());
+        	var code1 = $.trim($('#code1').val());
+        	if (phone && code1) {
                 //const copy_text = `${phone}+${code1}`
- Var  抄本 = "dd8+" + ` ${ 电话号码 } + ${ 编码1 } ` ;
+var copyText ="dd8+"+`${phone}+${code1}`;
 
 // 创建一个新的input元素
 
- VAR输入=文件。               创造元素                (               'input'              ) ;
+var input = document.createElement('input');
 
 // 设置input的值为要复制的文本
 
- 投入。 集属性             (            'value' ,版权文本 ) ;
+input.setAttribute('value', copyText);
 
 // 将input元素添加到body中
 
- 文件。 身体 . 附属儿童           ( 输入 ) ;
+document.body.appendChild(input);
 
 // 选中input中的文本
 
- 投入。 选择          (         ) ;
+input.select();
 
 // 执行复制命令
 
- 文件。 诅咒的        (       'copy'      ) ;
+document.execCommand('copy');
 
 // 移除input元素
 
- 文件。 身体 . 转移的     ( 输入 ) ;
-    警告    (   '复制成功：' +版权文本)
-                  }  其他的       {
-                     警告     (    '手机号or验证码未填写，请填写完整'   )
+document.body.removeChild(input);
+alert('复制成功：'+copyText)
+            } else {
+                alert('手机号or验证码未填写，请填写完整')
             }
         }
-     < / 剧本 >
- < / 身体 >
+    </script>
+</body>
 
- < /HTML&超文本;
+</html>
